@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <!-- Sequences For claim.claim -->
+        <record id="seq_claim_claim" model="ir.sequence">
+            <field name="name">claim.claim</field>
+            <field name="code">claim.claim</field>
+            <field name="prefix">%(year)s/%(month)s/</field>
+            <field name="padding">4</field>
+        </record>
+        
+        <!-- Sequences For registration -->
+        <record id="seq_registr" model="ir.sequence">
+            <field name="name">registration.registration</field>
+            <field name="code">registration.registration</field>
+            <field name="prefix">REG-</field>
+            <field name="padding">4</field>
+        </record>
+
+		<!-- menu For website page -->
+        <record id="menu_claim" model="website.menu">
+            <field name="name">Réclamation</field>
+            <field name="url">/formation/claim</field>
+            <field name="parent_id" ref="website.main_menu"/>
+            <field name="sequence" type="int">40</field>
+        </record>        
+
+        <!-- Sequences For bulletin.bulletin -->
+        <record id="seq_bulletin" model="ir.sequence">
+            <field name="name">bulletin.bulletin</field>
+            <field name="code">bulletin.bulletin</field>
+            <field name="prefix">BULL%(year)s-</field>
+            <field name="padding">4</field>
+        </record>
+        
+        <!-- Sequences For line.billetin -->
+        <record id="seq_bille_line" model="ir.sequence">
+            <field name="name">line.bulletin</field>
+            <field name="code">line.bulletin</field>
+            <field name="prefix">MODULE-%(year)s-</field>
+            <field name="padding">2</field>
+        </record>
+
+		<!-- menu for website bulletin page -->
+        <record id="menu_bull" model="website.menu">
+            <field name="name">Rélevé de notes</field>
+            <field name="url">/formation/bulletin</field>
+            <field name="parent_id" ref="website.main_menu"/>
+            <field name="sequence" type="int">40</field>
+        </record> 
+        
+</odoo>

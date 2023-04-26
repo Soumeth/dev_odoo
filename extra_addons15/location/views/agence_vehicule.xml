@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+<record id='agence_vehicule_action' model='ir.actions.act_window'>
+        <field name="name"> Gestion des Véhicules  </field>
+        <field name="res_model">agence.vehicule</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+<menuitem name="Mon Agence de Location" id="agence_base_menu" />
+ <menuitem name="Vehicules" id="agence_vehicule_menu"
+     parent="agence_base_menu" action="agence_vehicule_action"/>
+
+</odoo>

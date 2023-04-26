@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+            <!-- res.partner.inherit -->
+           <record model="ir.ui.view" id="student_inherit_form_view">
+                <field name="name">res.partner.form.inherit</field>
+                <field name="model">res.partner</field>
+                <field name="inherit_id" ref="base.view_partner_form"/>
+
+                <field name="arch" type="xml">
+                    <page name="internal_notes" position="after">
+	                    <page string='Infos etudiants' groups='formation.group_user'>
+		                    <group>
+		                    	<field name="student_ok"/>
+		                    	<field name="birthday"/>
+		                    	<field name="age" />
+		                    </group>
+	                    </page>
+
+	                    <page string='Inscriptions' attrs="{'invisible':[('customer','=',True)]}">
+		                    	<field name="reg_ids"/>
+	                    </page>
+
+	                    <page string='Bulletin de notes'>
+		                    	<field name="bulletin_ids"/>
+	                    </page>
+                    </page>
+
+                </field>
+            </record>
+
+			<!-- hr.employee inherit-->
+            <record model="ir.ui.view" id="prof_inherit_form_view">
+                <field name="name">hr.employee.form.inherit</field>
+                <field name="model">hr.employee</field>
+
+                <field name="inherit_id" ref="hr.view_employee_form"/>
+                <field name="arch" type="xml">
+		    		<xpath expr="//field[@name='birthday']" position="after">
+						<field name="age"/>
+		            </xpath>
+			    	<xpath expr="//field[@name='category_ids']" position="after">
+			    		<group>
+							<field name="teacher_ok"/>
+							<field name="cin"/>
+							<field name="speciality_id"/>
+						</group>
+		            </xpath>
+
+                </field>
+            </record>
+
+
+</odoo>

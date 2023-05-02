@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="year_tree_view" model="ir.ui.view">
+        <field name="name">Academic.year.tree</field>
+        <field name="model">year.year</field>
+        <field name="arch" type="xml">
+            <tree string="Année Académique">
+                <field name="name"/>
+                <field name="code"/>
+                <field name="start_date"/>
+                <field name="end_date"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="year_form_view" model="ir.ui.view">
+        <field name="name">academic.year.form</field>
+        <field name="model">year.year</field>
+        <field name="arch" type="xml">
+            <form string="Année Academique">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="start_date"/>
+                          <!--  <field name="sequence"/>  -->
+                        </group>
+                        <group>
+                            <field name="code"/>
+                            <field name="end_date"/>
+                            <field name="active"/>
+                        </group>
+
+                    </group>
+                    <notebook>
+                        <page string="Session">
+                            <field name="session_ids"/>
+                        </page>
+                        <page string="Description">
+                            <field name="description" placeholder="Entrer une description"/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- ########################### Action View ############################### -->
+    <record id="year_action_view" model="ir.actions.act_window">
+        <field name="name">Année Académique</field>
+        <field name="res_model">year.year</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Créer votre première année académique ici.
+            </p>
+        </field>
+    </record>
+</odoo>

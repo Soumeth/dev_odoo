@@ -1,1 +1,1 @@
-from . import formation
+from . import formation, year, student, module, bulletin

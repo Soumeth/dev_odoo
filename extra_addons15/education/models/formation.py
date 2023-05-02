@@ -130,18 +130,6 @@ class Claim(models.Model):
     total = fields.Float(compute='_total_compute', string='Total')
 
 
-class Year(models.Model):
-    _name = 'year.year'
-    _description = 'year.year'
-
-    name = fields.Char(string='Nom', required=False, readonly=False)
-    code = fields.Char(string='Code', required=False, readonly=False)
-    start_date = fields.Date('Date début', help="Date")
-    end_date = fields.Date('Date fin', help="Date")
-    description = fields.Text(string='description', required=False, readonly=False)
-    session_ids = fields.One2many('session.session', 'year_id', string='Session')
-
-
 class Session(models.Model):
     _name = 'session.session'
     _description = ''
@@ -206,24 +194,8 @@ class Section(models.Model):
     level_id = fields.Many2one('level.level', string='Niveau')
 
 
-class Module(models.Model):
-    _name = 'module.module'
-    _description = 'modules'
-
-    name = fields.Char(string='Nom', required=True)
-    code = fields.Char(string='Code')
-    description = fields.Text(string='Description')
-    section_id = fields.Many2one('section.section', string='Section')
 
 
-class Partner(models.Model):
-    _inherit = 'res.partner'
-
-    student_ok = fields.Boolean(string='Est un étudiant')
-    birthday = fields.Date(string='Date de naissance')
-    age = fields.Integer(string='Age')
-    reg_ids = fields.One2many('registration.registration', 'student_id', string='Inscription')
-    bulletin_ids = fields.One2many('bulletin.bulletin', 'student_id', string='Bulletin de notes')
 
 
 class Professor(models.Model):
@@ -243,25 +215,6 @@ class Speciality(models.Model):
     code = fields.Char(string='Code')
 
 
-class Bulletin(models.Model):
-    _name = 'bulletin.bulletin'
-
-    @api.depends('note_ids')
-    def _compute_average(self):
-        if self.note_ids:
-            average = 0
-            for module in self.note_ids:
-                average = average + module.average
-            self.average = round(average / len(self.note_ids))
-
-    name = fields.Char(string='Nom', readonly=True, default=lambda x: x.env['ir.sequence'].get('bulletin.bulletin'))
-    year_id = fields.Many2one('year.year', string='Année')
-    session_id = fields.Many2one('session.session', string='Session')
-    student_id = fields.Many2one('res.partner', string='Etudiant')
-    average = fields.Float(compute='_compute_average', string='Moyenne générale')
-    note_ids = fields.One2many('line.bulletin', 'bulletin_id', string='Notes')
-    user_id = fields.Many2one('res.users', string='Responsable')
-
 
 class LineBulletin(models.Model):
     _name = 'line.bulletin'
@@ -276,7 +229,7 @@ class LineBulletin(models.Model):
     @api.onchange('note_1', 'note_2')
     def _onchange_notes(self):
         if self.note_1 and self.note_2:
-            self.average = (self.note_1 + self.note_2) / 2
+            self.average = (self.note_1 + self.note_2) / 3
 
     name = fields.Char(string='Nom', readonly=True, default=lambda x: x.env['ir.sequence'].get('line.bulletin'))
     teacher_id = fields.Many2one('hr.employee', string='Professeur')
